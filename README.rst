@@ -7,6 +7,7 @@ Build
 -----
 
 .. code-block:: Shell
+
     DATE=$(date '+%Y-%m-%d')
     docker build --rm=true -t hub.bccvl.org.au/centos/centos7-epel:$DATE .
 
@@ -15,7 +16,8 @@ Build
 Publish
 -------
 
-.. code-brock:: Shell
+.. code-block:: Shell
+
     docker push hub.bccvl.org.au/centos/centos7-epel:$DATE
 
 
