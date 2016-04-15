@@ -1,4 +1,4 @@
-FROM centos:7.2.1511
+FROM centos:7
 
 RUN passwd -d root && \
     yum -y install epel-release && \
