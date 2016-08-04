@@ -19,7 +19,7 @@ node {
     def imagetag = date()
     img.push(imagetag)
 
-    slackSend color: 'good', message: "New Image ${imagename}:${imagetag}"
+    slackSend color: 'good', message: "New Image ${imagename}:${imagetag}\n${env.BUILD_URL}"
 }
 
 @NonCPS
