@@ -8,7 +8,7 @@ node {
     stage 'Build'
 
     def imagename = newImageTag('centos/centos7-epel')
-    def img = docker.build(imagename)
+    def img = docker.build(imagename, '--pull --no-cache')
 
     // publish image to registry
     stage 'Publish'
