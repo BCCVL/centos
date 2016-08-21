@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.Date
-
 node {
     // fetch source
     stage 'Checkout'
@@ -10,19 +7,13 @@ node {
     // build image
     stage 'Build'
 
-    def imagename = 'hub.bccvl.org.au/centos/centos7-epel'
+    def imagename = newImageTag('centos/centos7-epel')
     def img = docker.build(imagename)
 
     // publish image to registry
     stage 'Publish'
 
-    def imagetag = date()
-    img.push(imagetag)
+    img.push()
 
-    slackSend color: 'good', message: "New Image ${imagename}:${imagetag}\n${env.JOB_URL}"
-}
-
-@NonCPS
-def date() {
-    return new SimpleDateFormat("yyyy-MM-dd").format(new Date())
+    slackSend color: 'good', message: "New Image ${imagename}\n${env.JOB_URL}"
 }
