@@ -1,19 +1,26 @@
 node {
     // fetch source
-    stage 'Checkout'
+    stage('Checkout') {
 
-    checkout scm
+      checkout scm
+      
+    }
 
     // build image
-    stage 'Build'
+    stage('Build') {
 
-    def imagename = newImageTag('centos/centos7-epel')
-    def img = docker.build(imagename, '--pull --no-cache .')
+      def imagename = newImageTag('centos/centos7-epel')
+      def img = docker.build(imagename, '--pull --no-cache .')
+      
+    }
 
     // publish image to registry
-    stage 'Publish'
+    stage('Publish') {
 
-    img.push()
+      img.push()
 
-    slackSend color: 'good', message: "New Image ${imagename}\n${env.JOB_URL}"
+      slackSend color: 'good', message: "New Image ${imagename}\n${env.JOB_URL}"
+      
+    }
+    
 }
