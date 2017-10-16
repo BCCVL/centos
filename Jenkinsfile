@@ -23,7 +23,9 @@ node ('docker') {
   // publish image to registry
   stage('Publish') {
 
-    img.push()
+    docker.withRegistry('https://hub.bccvl.org.au', 'hub.bccvl.org.au') {
+        img.push()
+    }
 
     slackSend color: 'good', message: "New Image ${imagename}\n${env.JOB_URL}"
 
